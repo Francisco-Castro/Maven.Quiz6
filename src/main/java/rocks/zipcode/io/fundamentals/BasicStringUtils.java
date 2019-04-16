@@ -1,12 +1,15 @@
 package rocks.zipcode.io.fundamentals;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public class BasicStringUtils {
     /**
      * @param chars - characters used to instantiate a new string object
      * @return new String which wraps the arguments passed in
      */
     public static String getString(char[] chars) {
-        return null;
+        return String.valueOf(chars);
     }
 
     /**
@@ -14,7 +17,7 @@ public class BasicStringUtils {
      * @return new String which wraps the arguments passed in
      */
     public static String getString(Character[] chars) {
-        return null;
+        return Arrays.stream(chars).map( c -> String.valueOf(c)).collect(Collectors.joining());
     }
 
     /**
@@ -22,7 +25,8 @@ public class BasicStringUtils {
      * @return identical string with lowercase and uppercase vowels removed
      */
     public static String removeAllVowels(String string) {
-        return null;
+        return Arrays.stream(string.split(""))
+                .filter(s -> "aeiou".indexOf(s.toLowerCase()) < 0 ).collect(Collectors.joining());
     }
 
     /**
@@ -31,6 +35,17 @@ public class BasicStringUtils {
      * @return
      */
     public static String removeSpecifiedCharacters(String string, String charactersToRemove) {
-        return null;
+
+        String result = "";
+        Boolean flag;
+        for (String s : string.split("")) {
+            flag = false;
+            for (String s1 : charactersToRemove.split("")) {
+                flag = flag || s.contains(s1);
+            }
+            result += flag ? "" : s;
+        }
+
+        return result;
     }
 }
